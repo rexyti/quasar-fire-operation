@@ -1,5 +1,6 @@
 package com.quasar.operation.message.processor;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 import com.quasar.operation.message.processor.exceptions.IncorrectDistancesExeption;
 import com.quasar.operation.message.processor.exceptions.IncorrectMessagesNumberExeption;
+import com.quasar.operation.message.processor.exceptions.MessagesNoMatchException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +47,36 @@ public class MessageProcessorTest {
     }
 
     @Test
-    void testGetMessage() {
+    void testGetMessageSucces() {
+        String result1 = messageProcessor.getMessage(
+            new String[]{ "", "este", "es", "","mensaje" },
+            new String[]{ "","","","","","este", "", "un", "mensaje" },
+            new String[]{ "","","", "", "", "un","" }
+        );
+        String result2 = messageProcessor.getMessage(
+            new String[]{ "este", "", "","mensaje","secreto" },
+            new String[]{ "", "es", "", "","secreto" },
+            new String[]{ "este", "", "un", "","" }
+        );
+        assertEquals("este es un mensaje", result1);
+        assertEquals("este es un mensaje secreto", result2);
+    }
 
+    @Test
+    void testGetMessageFailBlackMessage() {
+        assertThrows(MessagesNoMatchException.class,()->messageProcessor.getMessage(
+            new String[]{ "", "este", "es", "","mensaje" },
+            new String[]{ "","","","","","este", "", "un", "mensaje" },
+            new String[]{ "","","", "", "", "","" }
+        ) );
+    }
+
+    @Test
+    void testGetMessageFailMessagesNoMatch() {
+        assertThrows(MessagesNoMatchException.class,()->messageProcessor.getMessage(
+            new String[]{ "este", "", "","mensaje","secreto2" },
+            new String[]{ "", "es", "", "","secreto1" },
+            new String[]{ "este", "", "un", "","" }
+        ) );
     }
 }

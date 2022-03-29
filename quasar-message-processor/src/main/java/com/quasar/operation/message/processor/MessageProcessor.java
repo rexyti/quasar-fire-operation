@@ -9,9 +9,11 @@ import com.quasar.operation.message.processor.exceptions.IncorrectDistancesExept
 import com.quasar.operation.message.processor.exceptions.IncorrectMessagesNumberExeption;
 import com.quasar.operation.message.processor.exceptions.MessageProcessorExeption;
 
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 @Setter
+@AllArgsConstructor
 public class MessageProcessor {
     private List<Point> satellites;
     private Float tolerance;

@@ -5,6 +5,8 @@ import com.quasar.operation.app.dto.MessageProcessorRequest;
 import com.quasar.operation.app.dto.MessageProcessorResponse;
 import com.quasar.operation.app.service.IMessageProcessorService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class MessageProcessorControllerImpl implements IMessageProcessorControll
 
     @PostMapping(value ="/", produces = "application/json")
     @Override
-    public MessageProcessorResponse postTopSecret(@RequestBody MessageProcessorRequest request) {
-        return messageProcessor.processRequest(request);
+    public ResponseEntity<MessageProcessorResponse> postTopSecret(@RequestBody MessageProcessorRequest request) {
+        return new ResponseEntity<>(messageProcessor.processRequest(request), HttpStatus.OK);
     }
 }

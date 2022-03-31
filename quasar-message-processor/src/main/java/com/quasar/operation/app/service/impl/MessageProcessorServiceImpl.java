@@ -9,6 +9,7 @@ import com.quasar.operation.app.dto.MessageProcessorRequest;
 import com.quasar.operation.app.dto.MessageProcessorResponse;
 import com.quasar.operation.app.dto.Position;
 import com.quasar.operation.app.dto.SatelliteMessage;
+import com.quasar.operation.app.exeptions.AppMessageProcessorExeption;
 import com.quasar.operation.app.service.IMessageProcessorService;
 import com.quasar.operation.app.utils.mapper.MessageProcessorMapper;
 import com.quasar.operation.message.processor.MessageProcessor;
@@ -38,11 +39,17 @@ public class MessageProcessorServiceImpl implements IMessageProcessorService {
     }
 
     @Override
-    public MessageProcessorResponse processRequest(MessageProcessorRequest request) throws MessageProcessorExeption{
-        MessageProcessorResponse response = new MessageProcessorResponse();
-        response.setPosition(processPosition(request));
-        response.setMessage(processMessage(request));
-        return response;
+    public MessageProcessorResponse processRequest(MessageProcessorRequest request) throws AppMessageProcessorExeption{
+        try {
+            MessageProcessorResponse response = new MessageProcessorResponse();
+            response.setPosition(processPosition(request));
+            response.setMessage(processMessage(request));
+            return response;
+        } catch (MessageProcessorExeption e) {
+            throw new AppMessageProcessorExeption(e.getMessage());
+        } catch (Exception e) {
+            throw new AppMessageProcessorExeption("Unknow exception");
+        }
     }
 
     

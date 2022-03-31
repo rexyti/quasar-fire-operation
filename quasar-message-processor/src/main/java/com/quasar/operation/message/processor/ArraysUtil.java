@@ -9,6 +9,9 @@ import com.quasar.operation.message.processor.exceptions.MessagesNoMatchExceptio
 
 public class ArraysUtil {
 
+    private ArraysUtil() {
+    }
+
     public static String[] trimArray(String[] array) {
         return Arrays.copyOfRange(array, calculateOffset(array), array.length);
     }

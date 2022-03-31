@@ -1,0 +1,23 @@
+server:
+  port : 5000
+spring:
+    mvc:
+        pathmatch:
+            matching-strategy: ANT_PATH_MATCHER
+message-processor:
+    tolerance: 0.01
+    satellites-index:
+        kenobi: 0
+        skywalker: 1
+        sato: 2
+    satellites-position:
+        kenobi:
+            x: -500
+            y: -200
+        skywalker:
+            x: 100
+            y: -100
+        sato:
+            x: 500
+            y: 100   
+

@@ -20,13 +20,11 @@ public class MessageProcessorTest {
 
     @BeforeEach
     void setup(){
-        messageProcessor= new MessageProcessor();
         List<Point> satellites = Arrays.asList(
             new Point(-500f,-200f),
             new Point(100f,-100f),
             new Point(500f,100f));
-        messageProcessor.setSatellites(satellites);
-        messageProcessor.setTolerance(0.01f);
+        messageProcessor= new MessageProcessor(satellites,0.01f);
     }
 
     @Test

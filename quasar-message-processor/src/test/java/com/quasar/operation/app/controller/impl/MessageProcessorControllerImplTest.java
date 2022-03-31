@@ -29,7 +29,12 @@ public class MessageProcessorControllerImplTest {
 					.content(TestUtil.getValidMessageRequest()))
 			.andExpect(status().isOk())
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$.message", is("este es un mensaje secreto")));
+			.andExpect(jsonPath("$.message", is("este es un mensaje secreto")))
+			.andExpect(jsonPath("$.position.x", lessThanOrEqualTo(-13.99)))
+			.andExpect(jsonPath("$.position.x", greaterThanOrEqualTo(-14.01)))
+			.andExpect(jsonPath("$.position.y", lessThanOrEqualTo(-40.99)))
+			.andExpect(jsonPath("$.position.y", greaterThanOrEqualTo(-41.01)));
+			
     }
 
 	@Test

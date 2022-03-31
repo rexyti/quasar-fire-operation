@@ -4,6 +4,9 @@ import java.util.List;
 
 public class MathUtil {
 
+    private MathUtil() {
+    }
+
     public static Float distanceBetweenPoints(Point p1, Point p2){
         return (float) Math.sqrt(Math.pow(p1.getX()-p2.getX(),2)+Math.pow(p1.getY()-p2.getY(),2));
     }

@@ -41,3 +41,30 @@ El proceso a realizar es el siguiente:
 4.	Para unificar los mensajes recorremos cada uno y comparamos los elementos en cada posición, los elementos vacíos se ignoran. 
 
 5.	Se verifican que los mensajes no vacios sean iguales, si son iguales se unifican si son diferentes se genera error.
+
+
+## Nivel II
+
+**Creando los servicios**
+
+Se va debe adecuar el desarrollo realizado en el nivel I para ser publicado en la nube, se elige AWS como el ambiente Cloud a utilizar.
+
+**Pasos realizados**
+
+1.	Se crea la estructura de un proyecto _Sprint-boot_
+
+2.	Se crea un archivo de configuración para almacenar la ubicación de los satélites
+
+3.	Se crea un _@Service_ que contiene la lógica para la utilización del MessageProcesor desarrollado en el nivel 1, partiendo de la configuración
+
+4.	Se crea un _@RestController_ para la publicación del servicio
+
+5.	Por ultimo agregamos la configuración de para utilizar _Swagger_ como de documentación del servicio
+
+**Paso a la nube**
+
+Elastic Beanstalk es el servicio de AWS seleccionado para la publicación del servicio por su facilidad de uso, los servicios quedan alojados de la siguiente manera:
+
+- Swagger con la forma de usar el servicio: http://quasarfireoperationtopsecret-env.eba-ptuv6bwz.us-east-1.elasticbeanstalk.com/swagger-ui/
+
+- Endpoint del servicio post: http://quasarfireoperationtopsecret-env.eba-ptuv6bwz.us-east-1.elasticbeanstalk.com/topsecret/

@@ -1,6 +1,7 @@
-package com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event;
+package com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -8,7 +9,8 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ProcessorInitializedDomainEvent {
+@Builder
+public class InitializeProcessorCommand {
     @TargetAggregateIdentifier
     private String processorId;
     private List<String> satellitesNames;

@@ -1,12 +1,14 @@
 package com.quasar.operation.quasarmessagesplitprocessor.domain.trace;
 
+import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command.CreateTraceCommand;
 import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.TraceCreatedDomainEvent;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.TraceRejectedDomainEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import java.util.List;
@@ -21,10 +23,14 @@ public class Trace {
     private String satelliteName;
     private Float distance;
     private List<String> message;
-    private TraceStatus status;
 
-    public enum TraceStatus {
-        IN_PROCESS, REJECTED, ACCEPTED
+    @CommandHandler
+    public Trace(CreateTraceCommand command) {
+        AggregateLifecycle.apply(new TraceCreatedDomainEvent(
+                traceId
+                , command.getSatelliteName()
+                , command.getDistance()
+                , command.getMessage()));
     }
 
     @EventSourcingHandler
@@ -33,16 +39,7 @@ public class Trace {
         this.satelliteName = tracedCreatedDomainEvent.getSatelliteName();
         this.distance = tracedCreatedDomainEvent.getDistance();
         this.message = tracedCreatedDomainEvent.getMessage();
-        this.status = TraceStatus.IN_PROCESS;
     }
 
-    @EventSourcingHandler
-    public void rejectTrace(TraceRejectedDomainEvent traceRejectedDomainEvent) {
-        this.status = TraceStatus.REJECTED;
-    }
 
-    @EventSourcingHandler
-    public void acceptTrace(TraceRejectedDomainEvent traceRejectedDomainEvent) {
-        this.status = TraceStatus.ACCEPTED;
-    }
 }

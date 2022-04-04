@@ -1,4 +1,4 @@
-package com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event;
+package com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command;
 
 import com.quasar.operation.quasarmessagesplitprocessor.domain.message.MessagePosition;
 import com.quasar.operation.quasarmessagesplitprocessor.domain.processor.Processor;
@@ -10,10 +10,10 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageProcessedDomainEvent {
+public class CreateMessageCommand {
 
     @TargetAggregateIdentifier
-    private String processorId;
+    private String messageId;
     private String message;
     private MessagePosition position;
     private Processor.ProcessorStatus status;

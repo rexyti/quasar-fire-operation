@@ -71,7 +71,37 @@ Elastic Beanstalk es el servicio de AWS seleccionado para la publicación del se
 
 
 ## Nivel III
-Documentacion en progreso
+
+Para el nivel III la complejidad aumenta un poco:
+
+- Se necesita de asincronía en los mensajes
+
+- Se debe dividir el mensaje en trazas que llegan por separado
+
+Con estos dos elementos en mente se opta (y por querer aplicar otros conceptos) un aproximación a DDD sobre una arquitectura hexagonal y el patrón CQRS.
+
+**Herramientas adicionales**
+
+Con el fin de generar nuestro bus de eventos, comandos y consultas utilizaremos el AXON server, este server nos da algunas herramientas valiosas para visualizar la traza de eventos, comando y consultas. Se puede utilizar la siguiente imagen de docker par su utilización
+
+docker run -d --name axonserver -p 8024:8024 -p 8124:8124 axoniq/axonserver
+
+**Algunas decisiones de diseño**
+
+El servicio de nivel 3 solo almacenara las trazas de entrada y los mensajes resultantes, el procesamiento de las trazas se realizará consumiendo el servicio generado en el nivel II
+
+Se crean 3 dominios Message, Trace, Processor
+
+**Algunas consideraciones**
+
+Para el testing y package de la aplicación es necesario servidor de axon este ejecutándose en local.
+
+**Paso a la nube**
+
+Al tener la necesidad de utilizar AXON server en conjunto con nuestro servicio desarrollado, crearemos un contenedor con docker que nos permita trabajar con estos elementos de forma mas sencilla a la hora de trabajarlo.
+
+Para este caso una instancia de _Elastic Beanstalk_ no cumple completamente todas nuestras necesidades, por tal razón utilizaremos una instancia de _EC2_
+
 
 -Endpoint del servicio post http://ec2-3-92-174-53.compute-1.amazonaws.com:5000/topsecret_split/{id}
 

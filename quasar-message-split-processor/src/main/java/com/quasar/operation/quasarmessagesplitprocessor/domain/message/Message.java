@@ -11,7 +11,6 @@ import org.axonframework.spring.stereotype.Aggregate;
 
 @Aggregate
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Message {
     @AggregateIdentifier

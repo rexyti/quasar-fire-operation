@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProcessorPreparedDomainEventHandler {
 
-
     Logger logger = LoggerFactory.getLogger(ProcessorPreparedDomainEventHandler.class);
 
     private MessageProcessorService messageProcessorService;

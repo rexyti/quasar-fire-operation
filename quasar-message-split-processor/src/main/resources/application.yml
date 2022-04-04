@@ -28,3 +28,9 @@ spring:
       enabled: true
       settings:
         web-allow-others: true
+---
+axon:
+  axonserver:
+    servers: axonserver:8124
+spring:
+  profiles: docker

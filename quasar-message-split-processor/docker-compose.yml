@@ -1,0 +1,29 @@
+version: '2'
+services:
+  axonserver:
+    container_name: axonserver
+    image: axoniq/axonserver
+    ports:
+      - 8024:8024
+      - 8124:8124
+    networks:
+      - quasar-network
+  jmrp-quasar-server:
+    container_name: jmrp-quasar-server
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    image: jmrp-quasar-server:latest
+    ports:
+      - 5000:5000
+    networks:
+      - quasar-network
+    depends_on:
+      - "axonserver"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    command: ["./wait-for-it.sh", "axonserver:8124","java","-jar","/quasar-message-split-processor-1.0.0.jar"]
+
+networks:
+  quasar-network:
+    driver: bridge

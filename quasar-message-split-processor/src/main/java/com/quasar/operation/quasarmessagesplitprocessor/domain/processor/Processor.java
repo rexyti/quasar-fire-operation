@@ -22,7 +22,6 @@ import java.util.Optional;
 
 @Aggregate
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Processor {
     @AggregateIdentifier

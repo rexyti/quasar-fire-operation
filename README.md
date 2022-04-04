@@ -68,3 +68,11 @@ Elastic Beanstalk es el servicio de AWS seleccionado para la publicación del se
 - Swagger con la forma de usar el servicio: http://quasarfireoperationtopsecret-env.eba-ptuv6bwz.us-east-1.elasticbeanstalk.com/swagger-ui/
 
 - Endpoint del servicio post: http://quasarfireoperationtopsecret-env.eba-ptuv6bwz.us-east-1.elasticbeanstalk.com/topsecret/
+
+
+## Nivel III
+Documentacion en progreso
+
+-Endpoint del servicio post http://ec2-3-92-174-53.compute-1.amazonaws.com:5000/topsecret_split/{id}
+-Endpoint del servicio get http://ec2-3-92-174-53.compute-1.amazonaws.com:5000/topsecret_split/
+-url servidor axon http://ec2-3-92-174-53.compute-1.amazonaws.com:8024/

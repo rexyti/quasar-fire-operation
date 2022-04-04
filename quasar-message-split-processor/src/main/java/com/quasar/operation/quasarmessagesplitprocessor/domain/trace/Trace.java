@@ -27,7 +27,7 @@ public class Trace {
     @CommandHandler
     public Trace(CreateTraceCommand command) {
         AggregateLifecycle.apply(new TraceCreatedDomainEvent(
-                traceId
+                command.getTraceId()
                 , command.getSatelliteName()
                 , command.getDistance()
                 , command.getMessage()));

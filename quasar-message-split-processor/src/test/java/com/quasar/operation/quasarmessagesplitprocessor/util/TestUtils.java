@@ -3,13 +3,9 @@ package com.quasar.operation.quasarmessagesplitprocessor.util;
 import com.quasar.operation.quasarmessagesplitprocessor.domain.message.MessagePosition;
 import com.quasar.operation.quasarmessagesplitprocessor.domain.processor.Processor;
 import com.quasar.operation.quasarmessagesplitprocessor.domain.processor.ProcessorTrace;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command.CreateProcessorTraceCommand;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command.InitializeProcessorCommand;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command.ProcessMessageCommant;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.MessageProcessedDomainEvent;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.ProcessorInitializedDomainEvent;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.ProcessorPreparedDomainEvent;
-import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.TraceReceivedDomainEvent;
+import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.command.*;
+import com.quasar.operation.quasarmessagesplitprocessor.domain.shared.event.*;
+import com.quasar.operation.quasarmessagesplitprocessor.infraestructure.controller.dto.MessageProcessorRequest;
 
 import java.util.*;
 
@@ -76,15 +72,48 @@ public class TestUtils {
     public static ProcessMessageCommant processMessageCommant(){
         MessagePosition position = new MessagePosition();
         position.setX(1.111f);
-        position.setX(2.222f);
+        position.setY(2.222f);
         return new ProcessMessageCommant(processorId, "this is the message",position, Processor.ProcessorStatus.SUCCESS);
     }
 
     public static MessageProcessedDomainEvent messageProcessedDomainEvent(){
         MessagePosition position = new MessagePosition();
         position.setX(1.111f);
-        position.setX(2.222f);
+        position.setY(2.222f);
         return new MessageProcessedDomainEvent(processorId, "this is the message",position, Processor.ProcessorStatus.SUCCESS);
+    }
+
+    public static CreateMessageCommand createMessageCommand(){
+        String uuid = "xxxx-yyyy-zzzz";
+        MessagePosition position = new MessagePosition();
+        position.setX(1.111f);
+        position.setY(2.222f);
+        return new CreateMessageCommand(uuid,"this is a message",position, Processor.ProcessorStatus.SUCCESS);
+    }
+
+    public static MessageCreatedDomainEvent messageCreatedDomainEvent (){
+        String uuid = "xxxx-yyyy-zzzz";
+        MessagePosition position = new MessagePosition();
+        position.setX(1.111f);
+        position.setY(2.222f);
+        return new MessageCreatedDomainEvent(uuid,"this is a message",position);
+    }
+
+    public static CreateTraceCommand createTraceCommand (){
+        String uuid = "1111-yyyy-zzzz";
+        return new CreateTraceCommand(uuid,"sato",2.222f, satoMessage);
+    }
+
+    public static TraceCreatedDomainEvent tracedCreatedDomainEvent (){
+        String uuid = "1111-yyyy-zzzz";
+        return new TraceCreatedDomainEvent(uuid,"sato",2.222f, satoMessage);
+    }
+
+    public static MessageProcessorRequest getValidMessageRequest(){
+        MessageProcessorRequest messageProcessorRequest = new MessageProcessorRequest();
+        messageProcessorRequest.setMessage(satoMessage);
+        messageProcessorRequest.setDistance(473.814309619f);
+        return messageProcessorRequest;
     }
 
 }
